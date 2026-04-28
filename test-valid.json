@@ -1,0 +1,32 @@
+{
+  "semanticSegments": [
+    {
+      "startTime": "2024-01-01T10:00:00Z",
+      "endTime": "2024-01-01T11:00:00Z",
+      "activity": {
+        "start": { "latLng": "50.123, 30.456" },
+        "end": { "latLng": "50.124, 30.457" },
+        "topCandidate": { "type": "walking", "probability": 0.85 }
+      }
+    },
+    {
+      "startTime": "2024-01-01T12:00:00Z",
+      "endTime": "2024-01-01T13:00:00Z",
+      "visit": {
+        "topCandidate": {
+          "placeLocation": { "latLng": "50.125, 30.458" },
+          "semanticType": "restaurant"
+        },
+        "probability": 0.92
+      }
+    },
+    {
+      "startTime": "2024-01-01T14:00:00Z",
+      "endTime": "2024-01-01T15:00:00Z",
+      "timelinePath": [
+        { "point": "50.126, 30.459", "time": "2024-01-01T14:10:00Z" },
+        { "point": "50.127, 30.460", "time": "2024-01-01T14:20:00Z" }
+      ]
+    }
+  ]
+}

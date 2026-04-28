@@ -1,0 +1,10 @@
+const fs = require("fs").promises;
+const path = require("path");
+const fsSync = require("fs");
+const { chain } = require('stream-chain');
+const { parser } = require('stream-json');
+const { streamArray } = require('stream-json/streamers/stream-array.js');
+
+// Import validation functions
+const {
+  validateCoordinate,

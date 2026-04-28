@@ -1,3 +1,12 @@
+/**
+ * @deprecated This file is deprecated. Use compare-tool.js instead.
+ * 
+ * New tool supports three matching strategies and CLI arguments:
+ *   node compare-tool.js --file1 <path> --file2 <path> --strategy <bruteforce|optimized|simple>
+ * 
+ * See: node compare-tool.js --help
+ */
+
 const fs = require('fs').promises;
 const path = require('path');
 
