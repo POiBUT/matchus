@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: matchus-app
+    ports:
+      - "${PORT:-3000}:3000"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+    volumes:
+      # Development: Mount local directory to container for live changes
+      # Comment out these volumes for production deployment
+      - .:/app
+      - /app/node_modules  # Prevent local node_modules from overwriting container dependencies
+    restart: unless-stopped

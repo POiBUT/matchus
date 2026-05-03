@@ -1,0 +1,521 @@
+{
+  "summary": {
+    "totalMatches": 24,
+    "timestamp": "2026-05-03T20:02:27.440Z",
+    "sourceFiles": {
+      "file1": "хронология1.csv",
+      "file2": "хронология2.csv"
+    },
+    "strategy": "optimized",
+    "options": {
+      "timeWindowMinutes": 30,
+      "maxDistanceMeters": 100
+    }
+  },
+  "matches": [
+    {
+      "matchNumber": 1,
+      "distanceMeters": 0,
+      "timeDifferenceMinutes": 0,
+      "record1": {
+        "startTime": "2015-01-20T18:46:00.000+03:00",
+        "endTime": "2015-01-20T18:46:00.000+03:00",
+        "probability": null,
+        "latitude": "55.6843886",
+        "longitude": "37.5837741",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2015-01-20T18:46:00.000+03:00",
+        "endTime": "2015-01-20T18:46:00.000+03:00",
+        "probability": null,
+        "latitude": "55.6843886",
+        "longitude": "37.5837741",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 2,
+      "distanceMeters": 8.330178577695664,
+      "timeDifferenceMinutes": 12,
+      "record1": {
+        "startTime": "2026-01-31T13:46:00.000+03:00",
+        "endTime": "2026-01-31T13:46:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8848973",
+        "longitude": "37.7202276",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-01-31T13:58:00.000+03:00",
+        "endTime": "2026-01-31T13:58:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8849098",
+        "longitude": "37.7200959",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 3,
+      "distanceMeters": 28.508632791770527,
+      "timeDifferenceMinutes": 12,
+      "record1": {
+        "startTime": "2026-01-31T13:47:00.000+03:00",
+        "endTime": "2026-01-31T13:47:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8838458",
+        "longitude": "37.7277819",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-01-31T13:59:00.000+03:00",
+        "endTime": "2026-01-31T13:59:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8837977",
+        "longitude": "37.7273329",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 4,
+      "distanceMeters": 85.48392337567401,
+      "timeDifferenceMinutes": 27,
+      "record1": {
+        "startTime": "2026-01-31T14:24:00.000+03:00",
+        "endTime": "2026-01-31T14:24:00.000+03:00",
+        "probability": null,
+        "latitude": "55.9125898",
+        "longitude": "37.9014539",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-01-31T14:51:00.000+03:00",
+        "endTime": "2026-01-31T14:51:00.000+03:00",
+        "probability": null,
+        "latitude": "55.9126801",
+        "longitude": "37.9028161",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 5,
+      "distanceMeters": 16.13888292765282,
+      "timeDifferenceMinutes": 23,
+      "record1": {
+        "startTime": "2026-01-31T14:32:00.000+03:00",
+        "endTime": "2026-01-31T14:32:00.000+03:00",
+        "probability": null,
+        "latitude": "55.9133421",
+        "longitude": "37.9155055",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-01-31T14:55:00.000+03:00",
+        "endTime": "2026-01-31T14:55:00.000+03:00",
+        "probability": null,
+        "latitude": "55.9133629",
+        "longitude": "37.9157618",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 6,
+      "distanceMeters": 78.25066115922708,
+      "timeDifferenceMinutes": 24,
+      "record1": {
+        "startTime": "2026-01-31T14:38:00.000+03:00",
+        "endTime": "2026-01-31T14:38:00.000+03:00",
+        "probability": null,
+        "latitude": "55.9038207",
+        "longitude": "37.9516282",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-01-31T15:02:00.000+03:00",
+        "endTime": "2026-01-31T15:02:00.000+03:00",
+        "probability": null,
+        "latitude": "55.90324",
+        "longitude": "37.9509191",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 7,
+      "distanceMeters": 86.61024959912339,
+      "timeDifferenceMinutes": 25,
+      "record1": {
+        "startTime": "2026-01-31T14:42:00.000+03:00",
+        "endTime": "2026-01-31T14:42:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8931394",
+        "longitude": "37.9500028",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-01-31T15:07:00.000+03:00",
+        "endTime": "2026-01-31T15:07:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8931103",
+        "longitude": "37.9486147",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 8,
+      "distanceMeters": 9.118128229943398,
+      "timeDifferenceMinutes": 3,
+      "record1": {
+        "startTime": "2026-01-31T15:12:00.000+03:00",
+        "endTime": "2026-01-31T15:12:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8911216",
+        "longitude": "37.9500138",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-01-31T15:09:00.000+03:00",
+        "endTime": "2026-01-31T15:09:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8910426",
+        "longitude": "37.950053",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 9,
+      "distanceMeters": 5.568359112321923,
+      "timeDifferenceMinutes": 1,
+      "record1": {
+        "startTime": "2026-01-31T16:17:00.000+03:00",
+        "endTime": "2026-01-31T16:17:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8923308",
+        "longitude": "37.9471871",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-01-31T16:16:00.000+03:00",
+        "endTime": "2026-01-31T16:16:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8923706",
+        "longitude": "37.9471329",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 10,
+      "distanceMeters": 1.1860456483330146,
+      "timeDifferenceMinutes": 26,
+      "record1": {
+        "startTime": "2026-01-31T23:30:00.000+03:00",
+        "endTime": "2026-01-31T23:30:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8911912",
+        "longitude": "37.9502765",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-01-31T23:56:00.000+03:00",
+        "endTime": "2026-01-31T23:56:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8911943",
+        "longitude": "37.9502947",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 11,
+      "distanceMeters": 1.1860456483330146,
+      "timeDifferenceMinutes": 26,
+      "record1": {
+        "startTime": "2026-01-31T23:41:00.000+03:00",
+        "endTime": "2026-01-31T23:41:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8911912",
+        "longitude": "37.9502765",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-02-01T00:07:00.000+03:00",
+        "endTime": "2026-02-01T00:07:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8911943",
+        "longitude": "37.9502947",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 12,
+      "distanceMeters": 1.8119105805434839,
+      "timeDifferenceMinutes": 24,
+      "record1": {
+        "startTime": "2026-01-31T23:52:00.000+03:00",
+        "endTime": "2026-01-31T23:52:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8911912",
+        "longitude": "37.9502765",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-02-01T00:16:00.000+03:00",
+        "endTime": "2026-02-01T00:16:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8912021",
+        "longitude": "37.9502981",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 13,
+      "distanceMeters": 0.4472200445994258,
+      "timeDifferenceMinutes": 16,
+      "record1": {
+        "startTime": "2026-02-01T00:02:00.000+03:00",
+        "endTime": "2026-02-01T00:02:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8911912",
+        "longitude": "37.9502765",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-02-01T00:18:00.000+03:00",
+        "endTime": "2026-02-01T00:18:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8911879",
+        "longitude": "37.9502724",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 14,
+      "distanceMeters": 2.614177474700762,
+      "timeDifferenceMinutes": 4,
+      "record1": {
+        "startTime": "2026-02-01T00:16:00.000+03:00",
+        "endTime": "2026-02-01T00:16:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8911912",
+        "longitude": "37.9502765",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-02-01T00:20:00.000+03:00",
+        "endTime": "2026-02-01T00:20:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8912133",
+        "longitude": "37.9502908",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 15,
+      "distanceMeters": 3.6277305516407257,
+      "timeDifferenceMinutes": 5,
+      "record1": {
+        "startTime": "2026-02-01T00:27:00.000+03:00",
+        "endTime": "2026-02-01T00:27:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8911912",
+        "longitude": "37.9502765",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-02-01T00:22:00.000+03:00",
+        "endTime": "2026-02-01T00:22:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8912074",
+        "longitude": "37.950327",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 16,
+      "distanceMeters": 2.4484661601833317,
+      "timeDifferenceMinutes": 13,
+      "record1": {
+        "startTime": "2026-02-01T00:37:00.000+03:00",
+        "endTime": "2026-02-01T00:37:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8911912",
+        "longitude": "37.9502765",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-02-01T00:24:00.000+03:00",
+        "endTime": "2026-02-01T00:24:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8912014",
+        "longitude": "37.9503113",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 17,
+      "distanceMeters": 1.6572027748185298,
+      "timeDifferenceMinutes": 4,
+      "record1": {
+        "startTime": "2026-02-01T00:42:00.000+03:00",
+        "endTime": "2026-02-01T00:42:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8911972",
+        "longitude": "37.9502858",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-02-01T00:38:00.000+03:00",
+        "endTime": "2026-02-01T00:38:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8912014",
+        "longitude": "37.9503113",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 18,
+      "distanceMeters": 0.8184040363477811,
+      "timeDifferenceMinutes": 20,
+      "record1": {
+        "startTime": "2026-02-01T12:11:00.000+03:00",
+        "endTime": "2026-02-01T12:11:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8912002",
+        "longitude": "37.9502809",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-02-01T11:51:00.000+03:00",
+        "endTime": "2026-02-01T11:51:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8911961",
+        "longitude": "37.9502918",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 19,
+      "distanceMeters": 78.01529718351603,
+      "timeDifferenceMinutes": 0,
+      "record1": {
+        "startTime": "2026-02-01T12:24:00.000+03:00",
+        "endTime": "2026-02-01T12:24:00.000+03:00",
+        "probability": null,
+        "latitude": "55.903557",
+        "longitude": "37.9509943",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-02-01T12:24:00.000+03:00",
+        "endTime": "2026-02-01T12:24:00.000+03:00",
+        "probability": null,
+        "latitude": "55.9028608",
+        "longitude": "37.9508392",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 20,
+      "distanceMeters": 81.24303518033499,
+      "timeDifferenceMinutes": 0,
+      "record1": {
+        "startTime": "2026-02-01T12:26:00.000+03:00",
+        "endTime": "2026-02-01T12:26:00.000+03:00",
+        "probability": null,
+        "latitude": "55.9065901",
+        "longitude": "37.933913",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-02-01T12:26:00.000+03:00",
+        "endTime": "2026-02-01T12:26:00.000+03:00",
+        "probability": null,
+        "latitude": "55.9062714",
+        "longitude": "37.9350859",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 21,
+      "distanceMeters": 56.65285396567102,
+      "timeDifferenceMinutes": 0,
+      "record1": {
+        "startTime": "2026-02-01T12:36:00.000+03:00",
+        "endTime": "2026-02-01T12:36:00.000+03:00",
+        "probability": null,
+        "latitude": "55.9127187",
+        "longitude": "37.9018356",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-02-01T12:36:00.000+03:00",
+        "endTime": "2026-02-01T12:36:00.000+03:00",
+        "probability": null,
+        "latitude": "55.9128761",
+        "longitude": "37.900971",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 22,
+      "distanceMeters": 59.90399791341699,
+      "timeDifferenceMinutes": 1,
+      "record1": {
+        "startTime": "2026-02-01T12:42:00.000+03:00",
+        "endTime": "2026-02-01T12:42:00.000+03:00",
+        "probability": null,
+        "latitude": "55.9187232",
+        "longitude": "37.8765267",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-02-01T12:41:00.000+03:00",
+        "endTime": "2026-02-01T12:41:00.000+03:00",
+        "probability": null,
+        "latitude": "55.9185553",
+        "longitude": "37.8774402",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 23,
+      "distanceMeters": 40.831593331528516,
+      "timeDifferenceMinutes": 0,
+      "record1": {
+        "startTime": "2026-02-01T12:44:00.000+03:00",
+        "endTime": "2026-02-01T12:44:00.000+03:00",
+        "probability": null,
+        "latitude": "55.9213125",
+        "longitude": "37.87289",
+        "source": "timelinePath"
+      },
+      "record2": {
+        "startTime": "2026-02-01T12:44:00.000+03:00",
+        "endTime": "2026-02-01T12:44:00.000+03:00",
+        "probability": null,
+        "latitude": "55.9216651",
+        "longitude": "37.872707",
+        "source": "timelinePath"
+      }
+    },
+    {
+      "matchNumber": 24,
+      "distanceMeters": 68.75971110508459,
+      "timeDifferenceMinutes": 7.083333333333333,
+      "record1": {
+        "startTime": "2026-02-01T12:10:55.000+03:00",
+        "endTime": "2026-02-01T12:18:09.000+03:00",
+        "probability": "0.6257631182670593",
+        "latitude": "55.8919676",
+        "longitude": "37.9489383",
+        "source": "activity.start.WALKING"
+      },
+      "record2": {
+        "startTime": "2026-02-01T12:18:00.000+03:00",
+        "endTime": "2026-02-01T12:18:00.000+03:00",
+        "probability": null,
+        "latitude": "55.8914465",
+        "longitude": "37.949532",
+        "source": "timelinePath"
+      }
+    }
+  ]
+}

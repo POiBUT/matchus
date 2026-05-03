@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>MatchUs - Location Comparison</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <!-- Session Validation Screen -->
+    <div id="session-validation" class="screen active">
+        <div class="container">
+            <div class="logo">
+                <img src="assets/icons/logo.svg" alt="MatchUs Logo" id="logo-img">
+            </div>
+            <h1>MatchUs</h1>
+            <p class="subtitle">Location Comparison Tool</p>
+            <div id="validation-status" class="status-message">
+                <div class="spinner"></div>
+                <p>Validating session...</p>
+            </div>
+            <div id="validation-error" class="error-message hidden">
+                <p>Session validation failed</p>
+                <button id="retry-validation" class="btn btn-primary">Retry</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- File Upload Screen -->
+    <div id="file-upload" class="screen">
+        <div class="container">
+            <h2>Upload Location Data</h2>
+            <p class="instruction">Upload your Google Takeout JSON file to compare locations with your partner.</p>
+            
+            <div class="upload-area" id="upload-area">
+                <div class="upload-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M24 4L24 32M24 4L16 12M24 4L32 12" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 28V40H40V28" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <p class="upload-text">Click to select or drop your JSON file here</p>
+                <p class="upload-hint">Google Takeout JSON format</p>
+                <input type="file" id="file-input" accept=".json" hidden>
+            </div>
+
+            <div id="file-info" class="file-info hidden">
+                <div class="file-details">
+                    <span class="file-name" id="file-name"></span>
+                    <span class="file-size" id="file-size"></span>
+                </div>
+                <button id="remove-file" class="btn-icon" title="Remove file">✕</button>
+            </div>
+
+            <div id="upload-error" class="error-message hidden"></div>
+
+            <button id="upload-btn" class="btn btn-primary btn-full" disabled>
+                Upload and Process
+            </button>
+
+            <div id="upload-progress" class="progress-container hidden">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="upload-progress-fill"></div>
+                </div>
+                <p class="progress-text" id="upload-progress-text">Processing...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparison Progress Screen -->
+    <div id="comparison-progress" class="screen">
+        <div class="container">
+            <h2>Comparing Locations</h2>
+            <div class="comparison-animation">
+                <div class="pulse-ring"></div>
+                <div class="pulse-ring delay-1"></div>
+                <div class="pulse-ring delay-2"></div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar large">
+                    <div class="progress-fill" id="comparison-progress-fill"></div>
+                </div>
+                <p class="progress-text" id="comparison-status">Waiting for partner's data...</p>
+            </div>
+            <div id="comparison-details" class="details hidden">
+                <p id="comparison-detail-text"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Display Screen -->
+    <div id="results-display" class="screen">
+        <div class="container">
+            <h2>Comparison Results</h2>
+            <div id="results-summary" class="results-summary">
+                <div class="stat-card">
+                    <div class="stat-value" id="total-matches">0</div>
+                    <div class="stat-label">Total Matches</div>
+                </div>
+            </div>
+            
+            <div id="results-list" class="results-list">
+                <!-- Results will be populated here -->
+            </div>
+
+            <div id="no-results" class="no-results hidden">
+                <p>No location matches found.</p>
+                <p class="hint">Try adjusting the time window or distance settings.</p>
+            </div>
+
+            <button id="send-results-btn" class="btn btn-primary btn-full">
+                Send Results to Chat
+            </button>
+            <button id="close-app-btn" class="btn btn-secondary btn-full">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <!-- Completion Screen -->
+    <div id="completion" class="screen">
+        <div class="container">
+            <div class="success-icon">
+                <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="3"/>
+                    <path d="M20 32L28 40L44 24" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h2>Complete!</h2>
+            <p id="completion-message">Results have been sent to the chat.</p>
+            <button id="completion-close-btn" class="btn btn-primary btn-full">
+                Close App
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts (ES Modules) -->
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
