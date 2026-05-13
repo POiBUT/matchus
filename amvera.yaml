@@ -6,6 +6,8 @@ meta:
   name: matchus
   description: Telegram Mini App for comparing Google Location History
   type: web
+  toolchain:
+    name: nodejs
 
 # Build configuration
 build:
@@ -14,6 +16,7 @@ build:
 
 # Service configuration
 service:
+  name: matchus
   hostname: amvera-user42-run-matchus
   port: 3000
   
@@ -34,5 +37,5 @@ healthcheck:
 
 # Auto-deploy settings
 deploy:
-  branch: master
+  branch: main
   auto_deploy: true
