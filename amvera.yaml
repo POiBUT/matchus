@@ -1,6 +1,12 @@
 # Amvera Cloud Configuration for Matchus Telegram Mini App
 version: '1.0'
 
+# Meta information
+meta:
+  name: matchus
+  description: Telegram Mini App for comparing Google Location History
+  type: web
+
 # Build configuration
 build:
   context: .
@@ -8,9 +14,8 @@ build:
 
 # Service configuration
 service:
-  name: matchus
   hostname: amvera-user42-run-matchus
-  port: ${PORT:-3000}
+  port: 3000
   
   # Environment variables (set in Amvera dashboard)
   env:
