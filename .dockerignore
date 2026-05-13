@@ -1,0 +1,39 @@
+# Git
+.git
+.gitignore
+
+# Tests
+*.test.js
+__mocks__
+tests/
+.vscode/
+
+# Test data and temp files
+*.csv
+test-*.json
+test-*
+bad.csv
+app_temp.txt
+хронология*
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Development files
+.env.example
+DEPLOYMENT.md
+TESTING.md
+README.md
+LICENSE
+
+# Lock files - let npm resolve dependencies in container
+package-lock.json
+
+# Node modules (will be installed in container)
+node_modules/
+package-lock.json
