@@ -9,13 +9,14 @@ build:
 # Service configuration
 service:
   name: matchus
+  hostname: amvera-user42-run-matchus
   port: ${PORT:-3000}
   
   # Environment variables (set in Amvera dashboard)
   env:
     - TELEGRAM_BOT_TOKEN
-    - WEBHOOK_URL
-    - MINI_APP_URL
+    - WEBHOOK_URL=https://amvera-user42-run-matchus.amvera.ru/webhook
+    - MINI_APP_URL=https://amvera-user42-run-matchus.amvera.ru
     - NODE_ENV=production
     - SESSION_TTL_MS=3600000
 
