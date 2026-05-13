@@ -8,12 +8,7 @@ meta:
   type: web
   toolchain:
     name: nodejs
-  environment:
-    - TELEGRAM_BOT_TOKEN
-    - WEBHOOK_URL
-    - MINI_APP_URL
-    - NODE_ENV
-    - SESSION_TTL_MS
+  environment: {}
 
 # Build configuration
 build:
