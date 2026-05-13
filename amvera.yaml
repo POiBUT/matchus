@@ -25,7 +25,7 @@ service:
   name: matchus
   hostname: amvera-user42-run-matchus
   port: 3000
-  
+
   # Environment variables (set in Amvera dashboard)
   env:
     - TELEGRAM_BOT_TOKEN
