@@ -1,5 +1,7 @@
 # Amvera Cloud Configuration for Matchus Telegram Mini App
-# Config structure based on Amvera documentation
 
 meta:
   environment: nodejs
+  toolchain:
+    name: nodejs
+    version: 20
