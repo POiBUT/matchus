@@ -50,20 +50,43 @@ const useWebhook = config.webhookUrl && config.webhookUrl !== '';
 
 if (useWebhook) {
   console.log(`[Server] Starting in webhook mode`);
-  console.log(`[Server] Webhook URL: ${config.webhookUrl}${config.webhookPath}`);
+  
+  // Build webhook URL correctly - avoid double /webhook path
+  let webhookFullUrl;
+  if (config.webhookUrl.endsWith(config.webhookPath)) {
+    // URL already contains the webhook path
+    webhookFullUrl = config.webhookUrl;
+  } else {
+    // Append webhook path to URL
+    webhookFullUrl = `${config.webhookUrl}${config.webhookPath}`;
+  }
+  
+  console.log(`[Server] Webhook URL: ${webhookFullUrl}`);
 
   // Create bot instance with webhook
   bot = new TelegramBot(config.botToken, { webHook: true });
 
-  // Set webhook
-  const webhookFullUrl = `${config.webhookUrl}${config.webhookPath}`;
-  bot.setWebHook(webhookFullUrl)
-    .then(() => {
-      console.log(`[Server] Webhook set to: ${webhookFullUrl}`);
-    })
-    .catch(err => {
-      console.error(`[Server] Failed to set webhook:`, err.message);
-    });
+  // Set webhook with retry logic
+  const setWebhookWithRetry = async (retries = 5, delay = 5000) => {
+    for (let i = 0; i < retries; i++) {
+      try {
+        console.log(`[Server] Attempting to set webhook (attempt ${i + 1}/${retries})...`);
+        await bot.setWebHook(webhookFullUrl);
+        console.log(`[Server] Webhook set to: ${webhookFullUrl}`);
+        return;
+      } catch (err) {
+        console.error(`[Server] Failed to set webhook (attempt ${i + 1}/${retries}):`, err.message);
+        if (i < retries - 1) {
+          console.log(`[Server] Retrying in ${delay / 1000} seconds...`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+        } else {
+          console.error(`[Server] All webhook attempts failed. Webhook may need to be set manually.`);
+        }
+      }
+    }
+  };
+
+  setWebhookWithRetry();
 
   // Use express to listen for webhook
   app.use(config.webhookPath, express.json());
