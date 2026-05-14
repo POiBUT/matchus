@@ -1,42 +1,5 @@
 # Amvera Cloud Configuration for Matchus Telegram Mini App
-version: '1.0'
+# Config structure based on Amvera documentation
 
-# Meta information
 meta:
-  name: matchus
-  description: Telegram Mini App for comparing Google Location History
-  type: web
-  toolchain:
-    name: nodejs
-  environment: {}
-
-# Build configuration
-build:
-  context: .
-  dockerfile: Dockerfile
-
-# Service configuration
-service:
-  name: matchus
-  hostname: amvera-user42-run-matchus
-  port: 3000
-
-  # Environment variables (set in Amvera dashboard)
-  env:
-    - TELEGRAM_BOT_TOKEN
-    - WEBHOOK_URL=https://amvera-user42-run-matchus.amvera.ru/webhook
-    - MINI_APP_URL=https://amvera-user42-run-matchus.amvera.ru
-    - NODE_ENV=production
-    - SESSION_TTL_MS=3600000
-
-# Health check
-healthcheck:
-  path: /api
-  port: 3000
-  timeout: 5s
-  interval: 30s
-
-# Auto-deploy settings
-deploy:
-  branch: main
-  auto_deploy: true
+  environment: nodejs
