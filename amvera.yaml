@@ -12,7 +12,11 @@ build:
   skip: false
 
 run:
-  command: PORT=80 npm run bot
+  command: PORT=80 NPM_CONFIG_LOGPATH=/tmp/npm-logs NPM_CONFIG_CACHE=/tmp/npm-cache npm run bot
   persistenceMount: /data
   containerPort: 80
   servicePort: 80
+  env:
+    # Автоматическое определение домена Amvera
+    # Если WEBHOOK_URL не задан, сервер использует HOSTNAME
+    MINI_APP_URL: https://${HOSTNAME}

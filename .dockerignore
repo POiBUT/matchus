@@ -2,6 +2,10 @@
 .git
 .gitignore
 
+# Node modules - IMPORTANT: exclude to prevent tar errors with symlinks
+node_modules
+package-lock.json
+
 # Tests
 *.test.js
 __mocks__
@@ -15,6 +19,7 @@ test-*
 bad.csv
 app_temp.txt
 хронология*
+matchus-deploy.zip
 
 # Logs
 *.log
@@ -28,6 +33,14 @@ Thumbs.db
 .env.example
 DEPLOYMENT.md
 TESTING.md
+docker-compose.yml
+.editorconfig
+
+# Build artifacts
+*.tar.gz
+*.zip
+dist/
+build/
 README.md
 LICENSE
 

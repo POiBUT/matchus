@@ -24,6 +24,27 @@ const config = {
   miniAppUrl: process.env.MINI_APP_URL || ''
 };
 
+// Helper to check if URL is a placeholder
+function isPlaceholder(url) {
+  return !url ||
+    url.includes('your-') ||
+    url.includes('example.com') ||
+    url.includes('placeholder') ||
+    url === '';
+}
+
+// For Amvera deployment, try to construct webhook URL from available environment variables
+// Amvera typically provides the domain via HOSTNAME
+// Prefer HOSTNAME over WEBHOOK_URL if WEBHOOK_URL is a placeholder
+if (process.env.HOSTNAME && (isPlaceholder(config.webhookUrl) || config.webhookUrl === '')) {
+  config.webhookUrl = `https://${process.env.HOSTNAME}`;
+  console.log(`[Server] Using HOSTNAME for webhook URL: ${config.webhookUrl}`);
+} else if (isPlaceholder(config.webhookUrl)) {
+  // WEBHOOK_URL is a placeholder, clear it
+  config.webhookUrl = '';
+  console.log(`[Server] WEBHOOK_URL appears to be a placeholder, ignoring`);
+}
+
 // Validate required configuration
 if (!config.botToken) {
   console.error('ERROR: TELEGRAM_BOT_TOKEN environment variable is required');
@@ -112,7 +133,13 @@ if (useWebhook) {
 // Set default MINI_APP_URL based on mode
 if (!config.miniAppUrl) {
   if (useWebhook) {
-    config.miniAppUrl = 'https://your-mini-app-url.com';
+    // Try to construct from various environment variables that Amvera might provide
+    const hostname = process.env.HOSTNAME || process.env.HOST || process.env.DOMAIN;
+    if (hostname) {
+      config.miniAppUrl = `https://${hostname}`;
+    } else {
+      config.miniAppUrl = 'https://your-mini-app-url.com';
+    }
   } else {
     config.miniAppUrl = `http://localhost:${config.port}`;
   }
