@@ -5,13 +5,15 @@ meta:
   toolchain:
     name: npm
     version: "20"
+
 build:
-  skip: false
   artifacts:
-    "": ""
+    - path: /
+      pattern: "*"
+  skip: false
+
 run:
-  command: npm run start
+  command: PORT=80 npm run bot
   persistenceMount: /data
   containerPort: 80
   servicePort: 80
-
