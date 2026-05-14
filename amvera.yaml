@@ -8,8 +8,7 @@ meta:
 
 build:
   artifacts:
-    - path: /
-      pattern: "*"
+    "": ""
   skip: false
 
 run:
