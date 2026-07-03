@@ -10,9 +10,4 @@ services:
       - .env
     environment:
       - NODE_ENV=production
-    volumes:
-      # Development: Mount local directory to container for live changes
-      # Comment out these volumes for production deployment
-      - .:/app
-      - /app/node_modules  # Prevent local node_modules from overwriting container dependencies
     restart: unless-stopped

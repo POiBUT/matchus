@@ -1,0 +1,52 @@
+# Git
+.git
+.gitignore
+
+# Node modules - IMPORTANT: exclude to prevent tar errors with symlinks
+node_modules
+package-lock.json
+
+# Tests
+*.test.js
+__mocks__
+tests/
+.vscode/
+
+# Test data and temp files
+*.csv
+test-*.json
+test-*
+bad.csv
+app_temp.txt
+хронология*
+matchus-deploy.zip
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Development files
+.env.example
+DEPLOYMENT.md
+TESTING.md
+docker-compose.yml
+.editorconfig
+
+# Build artifacts
+*.tar.gz
+*.zip
+dist/
+build/
+README.md
+LICENSE
+
+# Lock files - let npm resolve dependencies in container
+package-lock.json
+
+# Node modules (will be installed in container)
+node_modules/
+package-lock.json

@@ -56,8 +56,8 @@ cp .env.example .env
 | Переменная | Описание | Пример |
 |------------|----------|--------|
 | `TELEGRAM_BOT_TOKEN` | Токен бота, полученный от @BotFather | `1234567890:ABCdefGHIjklMNOpqrsTUVwxyz` |
-| `WEBHOOK_URL` | Полный URL для вебхука Telegram | `https://your-domain.com/webhook` |
-| `MINI_APP_URL` | URL вашего Mini App | `https://your-domain.com` |
+| `WEBHOOK_URL` | Полный URL для вебхука Telegram | `https://yachtquest.pro/webhook` |
+| `MINI_APP_URL` | URL вашего Mini App | `https://yachtquest.pro` |
 | `PORT` | Порт, на котором запущен сервер (по умолчанию 3000) | `3000` |
 | `SESSION_TTL_MS` | Время жизни сессии в миллисекундах (1 час = 3600000) | `3600000` |
 
@@ -70,8 +70,8 @@ cp .env.example .env
 
 ### Настройка WEBHOOK_URL и MINI_APP_URL
 
-- `WEBHOOK_URL` — это URL, на который Telegram будет отправлять обновления. Обычно это `https://your-domain.com/webhook`
-- `MINI_APP_URL` — это URL, по которому открывается Mini App. Обычно это `https://your-domain.com`
+- `WEBHOOK_URL` — это URL, на который Telegram будет отправлять обновления. Обычно это `https://yachtquest.pro/webhook`
+- `MINI_APP_URL` — это URL, по которому открывается Mini App. Обычно это `https://yachtquest.pro`
 
 **Важно:** Оба URL должны использовать протокол **HTTPS** (обязательное требование Telegram).
 
@@ -226,12 +226,16 @@ sudo apt install nginx certbot python3-certbot-nginx
 ```
 
 2. Настройте Nginx, раскомментировав HTTPS-секцию в `nginx.conf`:
-   - Замените `your-domain.com` на ваш домен
+   - Замените `yachtquest.pro` на ваш домен
    - Укажите правильные пути к SSL-сертификатам
 
 3. Получите SSL-сертификат:
 ```bash
-sudo certbot --nginx -d your-domain.com
+sudo certbot --nginx -d yachtquest.pro
+```
+Например
+```bash
+sudo certbot --nginx -d yachtquest.pro -d www.yachtquest.pro
 ```
 
 4. Certbot автоматически настроит Nginx и обновит конфигурацию.
@@ -263,7 +267,7 @@ ssh user@your-server-ip
 ### Шаг 2: Установка необходимого ПО
 
 ```bash
-# Обновление пакетов
+# Обновление пакетов - при обновлении может появиться диалоговое окно, необходимо убедиться что у ssh.service отсутствует звездочка, иначе подключение по SSH пропадет и необходимо будет заново подключаться.
 sudo apt update && sudo apt upgrade -y
 
 # Установка Node.js 20.x
@@ -304,8 +308,8 @@ nano .env
 Заполните файл `.env`:
 ```
 TELEGRAM_BOT_TOKEN=ваш_токен_от_BotFather
-WEBHOOK_URL=https://your-domain.com/webhook
-MINI_APP_URL=https://your-domain.com
+WEBHOOK_URL=https://yachtquest.pro/webhook
+MINI_APP_URL=https://yachtquest.pro
 PORT=3000
 SESSION_TTL_MS=3600000
 ```
@@ -320,12 +324,12 @@ sudo nginx -t
 sudo systemctl restart nginx
 ```
 
-Отредактируйте `/etc/nginx/sites-available/matchus`, заменив `your-domain.com` на ваш домен и раскомментировав HTTPS-секцию.
+Отредактируйте `/etc/nginx/sites-available/matchus`, заменив `yachtquest.pro` на ваш домен и раскомментировав HTTPS-секцию.
 
 ### Шаг 6: Получение SSL-сертификата
 
 ```bash
-sudo certbot --nginx -d your-domain.com
+sudo certbot --nginx -d yachtquest.pro
 ```
 
 Следуйте инструкциям на экране. Certbot настроит автообновление сертификатов.
@@ -348,7 +352,7 @@ docker-compose up -d --build
 После запуска приложения установите вебхук в Telegram:
 
 ```bash
-curl -F "url=https://your-domain.com/webhook" https://api.telegram.org/bot<YOUR_BOT_TOKEN>/setWebhook
+curl -F "url=https://yachtquest.pro/webhook" https://api.telegram.org/bot<YOUR_BOT_TOKEN>/setWebhook
 ```
 
 Замените `<YOUR_BOT_TOKEN>` на ваш токен.
@@ -388,7 +392,7 @@ curl https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getWebhookInfo
 {
   "ok": true,
   "result": {
-    "url": "https://your-domain.com/webhook",
+    "url": "https://yachtquest.pro/webhook",
     "has_custom_certificate": false,
     "pending_update_count": 0,
     "last_error_date": null,
@@ -431,7 +435,7 @@ sudo tail -f /var/log/nginx/access.log
 
 ```bash
 # Установка вебхука
-curl -F "url=https://your-domain.com/webhook" https://api.telegram.org/bot<TOKEN>/setWebhook
+curl -F "url=https://yachtquest.pro/webhook" https://api.telegram.org/bot<TOKEN>/setWebhook
 
 # Проверка информации о вебхуке
 curl https://api.telegram.org/bot<TOKEN>/getWebhookInfo
@@ -459,6 +463,34 @@ pm2 monit
 ### Управление Docker
 
 ```bash
+
+### Установка
+# Добавьте официальный GPG ключ Docker:
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+# Добавьте репозиторий Docker:
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Установите Docker Engine и Docker Compose:
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+# Добавьте пользователя в группу docker (чтобы не использовать sudo):
+sudo usermod -aG docker $USER
+newgrp docker
+
+# Проверьте, что Docker работает:
+docker ps
+
+# После установки Docker, перенесите файлы проекта на сервер и выполните:
+cd /path/to/matchus
+docker compose up -d --build
+docker compose logs -f
+
+###
+
+
 # Просмотр работающих контейнеров
 docker-compose ps
 

@@ -1,0 +1,18 @@
+# Amvera Cloud Configuration for Matchus Telegram Mini App
+
+meta:
+  environment: nodejs
+  toolchain:
+    name: npm
+    version: "20"
+
+build:
+  skip: false
+  artifacts:
+    "": ""
+
+run:
+  command: PORT=80 npm run bot
+  persistenceMount: /data
+  containerPort: 80
+  servicePort: 80
