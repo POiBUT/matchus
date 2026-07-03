@@ -6,7 +6,7 @@ import { validateSession, getFileId, notifyFileUploaded, submitResults, getSessi
 import { readFileAsText, downloadTelegramFile, readBlobAsText, validateFile, setTempData, getTempData, removeTempData, cleanup as cleanupFileHandler } from './file-handler.js';
 import { processJsonFileAsync, jsonToCSV, generateStatisticsSimple } from './json-converter.js';
 import { findMatches } from './compare-core.js';
-import { showScreen, updateProgress, displayResults, showError, showValidationStatus, updateFileInfo, showUploadProgress, showCompletion, SCREENS } from './ui-controller.js';
+import { showScreen, updateProgress, displayResults, displayNonMatching, showError, showValidationStatus, updateFileInfo, showUploadProgress, showCompletion, showSettingsScreen, getSettingsValues, SCREENS } from './ui-controller.js';
 
 // App state
 let appState = {
@@ -318,31 +318,63 @@ async function processPartnerFile(fileId) {
         const partnerCsvString = await jsonToCSV(partnerJsonString);
         appState.csvData2 = partnerCsvString;
         
-        updateProgress('Running comparison...', 70);
-        
-        // Run comparison
-        const results = findMatches(appState.csvData1, appState.csvData2, {
-            strategy: 'optimized',
+        // Show settings screen before running comparison
+        showSettingsScreen({
             timeWindowMinutes: 30,
             maxDistanceMeters: 100
         });
         
-        appState.results = results;
-        
-        updateProgress('Comparison complete!', 100);
-        
-        // Submit results to server
-        await submitResults(appState.sessionId, results);
-        
-        // Display results
-        setTimeout(() => {
-            displayResults(results);
-        }, 500);
+        // Wait for user to click "Run Comparison"
+        setupStartComparisonButton();
         
     } catch (error) {
         console.error('Process partner file error:', error);
         showError(`Comparison failed: ${error.message}`, SCREENS.COMPARISON_PROGRESS);
     }
+}
+
+/**
+ * Set up the "Run Comparison" button on the settings screen
+ */
+function setupStartComparisonButton() {
+    const btn = document.getElementById('start-comparison-btn');
+    if (!btn) return;
+    
+    // Remove old listeners by cloning
+    const newBtn = btn.cloneNode(true);
+    btn.parentNode.replaceChild(newBtn, btn);
+    
+    newBtn.addEventListener('click', async () => {
+        try {
+            showScreen(SCREENS.COMPARISON_PROGRESS);
+            updateProgress('Running comparison...', 70);
+            
+            const settings = getSettingsValues();
+            appState.comparisonSettings = settings;
+            
+            // Run comparison
+            const results = findMatches(appState.csvData1, appState.csvData2, settings);
+            
+            appState.results = results;
+            
+            updateProgress('Comparison complete!', 100);
+            
+            // Submit results to server
+            await submitResults(appState.sessionId, results);
+            
+            // Display results
+            setTimeout(() => {
+                displayResults(results);
+                if (results.nonMatching) {
+                    displayNonMatching(results.nonMatching);
+                }
+            }, 500);
+            
+        } catch (error) {
+            console.error('Comparison error:', error);
+            showError(`Comparison failed: ${error.message}`, SCREENS.COMPARISON_PROGRESS);
+        }
+    });
 }
 
 /**

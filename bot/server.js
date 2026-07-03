@@ -13,6 +13,8 @@ const path = require('path');
 const SessionStore = require('./session-store');
 const CommandHandler = require('./handlers/command-handler');
 const CallbackHandler = require('./handlers/callback-handler');
+const HowtoHandler = require('./handlers/howto-handler');
+const DocumentHandler = require('./handlers/document-handler');
 const SessionAPI = require('./api/session-api');
 
 // Load configuration from environment variables
@@ -41,7 +43,7 @@ app.use(express.static(path.join(__dirname, '../mini-app')));
 
 // Choose Telegram Bot library
 // Using node-telegram-bot-api for simplicity and webhook support
-const TelegramBot = require('node-telegram-bot-api');
+const { TelegramBot } = require('node-telegram-bot-api');
 
 let bot;
 
@@ -98,6 +100,8 @@ if (!config.miniAppUrl) {
 // Initialize handlers
 const commandHandler = new CommandHandler(bot, sessionStore, config);
 const callbackHandler = new CallbackHandler(bot, sessionStore, config);
+const howtoHandler = new HowtoHandler(bot);
+const documentHandler = new DocumentHandler(bot, sessionStore);
 
 // Initialize API routes
 const sessionAPI = new SessionAPI(sessionStore, config);

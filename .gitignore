@@ -3,6 +3,7 @@
 хронология*
 *.csv
 matches*
+start-bot.bat
 
 # Logs
 logs

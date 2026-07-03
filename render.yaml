@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: matchus-bot
+    env: node
+    buildCommand: npm install
+    startCommand: node bot/server.js
+    healthCheckPath: /health
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: MINI_APP_URL
+        value: https://matchus-bot.onrender.com
+      - key: PORT
+        value: 3000
+    autoDeploy: true

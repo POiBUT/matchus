@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>MatchUs - Location Comparison</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="css/styles.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
@@ -68,6 +70,38 @@
         </div>
     </div>
 
+    <!-- Settings Screen -->
+    <div id="settings" class="screen">
+        <div class="container">
+            <h2>Settings</h2>
+            <p class="instruction">Adjust comparison parameters before running the analysis.</p>
+
+            <div class="setting-group">
+                <label for="time-window" class="setting-label">
+                    Time window: <span id="time-window-value">30</span> minutes
+                </label>
+                <input type="range" id="time-window" class="setting-slider"
+                    min="0" max="120" value="30" step="1"
+                    oninput="document.getElementById('time-window-value').textContent = this.value">
+                <div class="setting-hint">Max time difference between matching points</div>
+            </div>
+
+            <div class="setting-group">
+                <label for="max-distance" class="setting-label">
+                    Max distance: <span id="max-distance-value">100</span> meters
+                </label>
+                <input type="range" id="max-distance" class="setting-slider"
+                    min="10" max="1000" value="100" step="10"
+                    oninput="document.getElementById('max-distance-value').textContent = this.value">
+                <div class="setting-hint">Max distance between matching coordinates</div>
+            </div>
+
+            <button id="start-comparison-btn" class="btn btn-primary btn-full">
+                Run Comparison
+            </button>
+        </div>
+    </div>
+
     <!-- Comparison Progress Screen -->
     <div id="comparison-progress" class="screen">
         <div class="container">
@@ -104,9 +138,26 @@
                 <!-- Results will be populated here -->
             </div>
 
+            <div id="results-map-section" class="results-map-section hidden">
+                <div class="results-view-toggle">
+                    <button class="view-btn active" data-view="list">List</button>
+                    <button class="view-btn" data-view="map">Map</button>
+                </div>
+                <div id="map-container" class="map-container hidden"></div>
+            </div>
+
             <div id="no-results" class="no-results hidden">
                 <p>No location matches found.</p>
                 <p class="hint">Try adjusting the time window or distance settings.</p>
+            </div>
+
+            <div id="non-matching-section" class="non-matching-section hidden">
+                <h3>Places visited at different times</h3>
+                <div class="non-matching-tabs">
+                    <button class="tab-btn active" data-user="1">Your places</button>
+                    <button class="tab-btn" data-user="2">Partner's places</button>
+                </div>
+                <div id="non-matching-content" class="non-matching-content"></div>
             </div>
 
             <button id="send-results-btn" class="btn btn-primary btn-full">

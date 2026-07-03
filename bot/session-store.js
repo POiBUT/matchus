@@ -39,8 +39,14 @@ class SessionStore {
       sessionId,
       initiatorId,
       partnerId,
-      status: 'pending', // pending | approved | file_uploaded | completed
+      status: 'pending', // pending | approved | initiator_uploaded | partner_uploaded | completed
       fileId: null,
+      initiatorFileId: null,  // file_id of initiator's JSON upload
+      partnerFileId: null,    // file_id of partner's JSON upload
+      initiatorCsvFileId: null, // file_id of converted CSV (initiator)
+      partnerCsvFileId: null,   // file_id of converted CSV (partner)
+      csvData1: null,           // in-memory CSV string (initiator)
+      csvData2: null,           // in-memory CSV string (partner)
       chatId,
       createdAt: now,
       expiresAt
@@ -107,6 +113,60 @@ class SessionStore {
     this.sessions.set(sessionId, session);
     console.log(`[SessionStore] Session ${sessionId} file_id set`);
     return session;
+  }
+
+  /**
+   * Register a user's file upload in a session
+   * @param {string} sessionId
+   * @param {number} userId - Telegram user ID
+   * @param {string} jsonFileId - file_id of uploaded JSON
+   * @param {string} csvFileId - file_id of converted CSV
+   * @param {string} csvData - in-memory CSV string
+   * @returns {object|null} Updated session or null if not found
+   */
+  registerUpload(sessionId, userId, jsonFileId, csvFileId, csvData) {
+    const session = this.getSession(sessionId);
+    if (!session) {
+      return null;
+    }
+
+    const isInitiator = userId === session.initiatorId;
+
+    if (isInitiator) {
+      session.initiatorFileId = jsonFileId;
+      session.initiatorCsvFileId = csvFileId;
+      session.csvData1 = csvData;
+    } else {
+      session.partnerFileId = jsonFileId;
+      session.partnerCsvFileId = csvFileId;
+      session.csvData2 = csvData;
+    }
+
+    // Update status
+    const initDone = session.initiatorFileId !== null;
+    const partnerDone = session.partnerFileId !== null;
+    session.status = initDone && partnerDone ? 'both_uploaded' : (isInitiator ? 'initiator_uploaded' : 'partner_uploaded');
+
+    this.sessions.set(sessionId, session);
+    console.log(`[SessionStore] Session ${sessionId}: ${isInitiator ? 'initiator' : 'partner'} uploaded (status: ${session.status})`);
+    return session;
+  }
+
+  /**
+   * Find active session for a user
+   * @param {number} userId - Telegram user ID
+   * @returns {object|null} First matching session or null
+   */
+  findSessionByUser(userId) {
+    for (const [id, session] of this.sessions) {
+      if (new Date() > session.expiresAt) {
+        continue;
+      }
+      if (session.initiatorId === userId || session.partnerId === userId) {
+        return session;
+      }
+    }
+    return null;
   }
 
   /**

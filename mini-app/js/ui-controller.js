@@ -1,3 +1,5 @@
+import { renderMatchMap, destroyMap } from './map-renderer.js';
+
 /**
  * UI Controller Module - Screen management and UI updates
  */
@@ -6,6 +8,7 @@
 const SCREENS = {
     SESSION_VALIDATION: 'session-validation',
     FILE_UPLOAD: 'file-upload',
+    SETTINGS: 'settings',
     COMPARISON_PROGRESS: 'comparison-progress',
     RESULTS_DISPLAY: 'results-display',
     COMPLETION: 'completion'
@@ -70,20 +73,61 @@ export function displayResults(results) {
     // Show/hide no results message
     const noResultsEl = document.getElementById('no-results');
     const resultsListEl = document.getElementById('results-list');
+    const mapSection = document.getElementById('results-map-section');
     
     if (matches.length === 0) {
         if (noResultsEl) noResultsEl.classList.remove('hidden');
         if (resultsListEl) resultsListEl.classList.add('hidden');
+        if (mapSection) mapSection.classList.add('hidden');
     } else {
         if (noResultsEl) noResultsEl.classList.add('hidden');
         if (resultsListEl) {
             resultsListEl.classList.remove('hidden');
             populateResultsList(resultsListEl, matches);
         }
+        if (mapSection) {
+            mapSection.classList.remove('hidden');
+            setupViewToggle(matches);
+        }
     }
     
     // Show results screen
     showScreen(SCREENS.RESULTS_DISPLAY);
+}
+
+/**
+ * Set up list/map view toggle
+ * @param {Array} matches 
+ */
+function setupViewToggle(matches) {
+    const mapSection = document.getElementById('results-map-section');
+    const mapContainer = document.getElementById('map-container');
+    const resultsList = document.getElementById('results-list');
+    if (!mapSection || !mapContainer || !resultsList) return;
+
+    const toggleBtns = mapSection.querySelectorAll('.view-btn');
+    if (!toggleBtns.length) return;
+
+    // Default: show list, hide map
+    resultsList.classList.remove('hidden');
+    mapContainer.classList.add('hidden');
+
+    toggleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            toggleBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            if (btn.dataset.view === 'map') {
+                resultsList.classList.add('hidden');
+                mapContainer.classList.remove('hidden');
+                renderMatchMap(matches);
+            } else {
+                resultsList.classList.remove('hidden');
+                mapContainer.classList.add('hidden');
+                destroyMap();
+            }
+        });
+    });
 }
 
 /**
@@ -286,6 +330,66 @@ export function showUploadProgress(show, message = 'Processing...', percent = 0)
 }
 
 /**
+ * Display non-matching locations section
+ * @param {Object} nonMatching - { user1: [...], user2: [...] }
+ */
+export function displayNonMatching(nonMatching) {
+    const section = document.getElementById('non-matching-section');
+    const content = document.getElementById('non-matching-content');
+    if (!section || !content) return;
+
+    const hasUser1 = nonMatching?.user1?.length > 0;
+    const hasUser2 = nonMatching?.user2?.length > 0;
+
+    if (!hasUser1 && !hasUser2) {
+        section.classList.add('hidden');
+        return;
+    }
+
+    section.classList.remove('hidden');
+
+    // Render user 1 by default
+    renderNonMatchingList(content, nonMatching.user1 || [], 1);
+
+    // Tab switching
+    const tabs = section.querySelectorAll('.tab-btn');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            const userId = parseInt(tab.dataset.user);
+            const data = userId === 1 ? nonMatching.user1 : nonMatching.user2;
+            renderNonMatchingList(content, data || [], userId);
+        });
+    });
+}
+
+function renderNonMatchingList(container, items, userId) {
+    container.innerHTML = '';
+
+    if (items.length === 0) {
+        container.innerHTML = '<p class="hint" style="text-align:center;padding:16px;">No unique places found.</p>';
+        return;
+    }
+
+    const list = document.createElement('div');
+    list.className = 'non-matching-list';
+
+    items.forEach((item, i) => {
+        const el = document.createElement('div');
+        el.className = 'non-matching-item';
+        el.innerHTML = `
+            <div class="place-name">#${i + 1} ${item.source}</div>
+            <div class="place-meta">${item.latitude}, ${item.longitude}</div>
+            <div class="place-meta">Visited ${item.count} times</div>
+        `;
+        list.appendChild(el);
+    });
+
+    container.appendChild(list);
+}
+
+/**
  * Show completion screen
  * @param {string} message - completion message
  */
@@ -295,6 +399,42 @@ export function showCompletion(message = 'Results have been sent to the chat.') 
         messageEl.textContent = message;
     }
     showScreen(SCREENS.COMPLETION);
+}
+
+/**
+ * Show settings screen with current values
+ * @param {Object} currentSettings - current settings (optional)
+ */
+export function showSettingsScreen(currentSettings = {}) {
+    const timeWindow = document.getElementById('time-window');
+    const maxDistance = document.getElementById('max-distance');
+    const timeWindowVal = document.getElementById('time-window-value');
+    const maxDistanceVal = document.getElementById('max-distance-value');
+
+    if (timeWindow) {
+        timeWindow.value = currentSettings.timeWindowMinutes ?? 30;
+        if (timeWindowVal) timeWindowVal.textContent = timeWindow.value;
+    }
+    if (maxDistance) {
+        maxDistance.value = currentSettings.maxDistanceMeters ?? 100;
+        if (maxDistanceVal) maxDistanceVal.textContent = maxDistance.value;
+    }
+
+    showScreen(SCREENS.SETTINGS);
+}
+
+/**
+ * Get current settings values from the settings screen
+ * @returns {Object} settings object
+ */
+export function getSettingsValues() {
+    const timeWindow = document.getElementById('time-window');
+    const maxDistance = document.getElementById('max-distance');
+    return {
+        strategy: 'optimized',
+        timeWindowMinutes: parseInt(timeWindow?.value) || 30,
+        maxDistanceMeters: parseInt(maxDistance?.value) || 100
+    };
 }
 
 // Export screen constants
